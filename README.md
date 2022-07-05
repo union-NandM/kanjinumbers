@@ -1,4 +1,4 @@
-# kanjinumbe ｒｓ
+# kanjinumbers
 
 ## 概要
 
