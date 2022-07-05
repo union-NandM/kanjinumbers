@@ -1,0 +1,44 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+
+Globals:
+  Function:
+    Timeout: 10
+  Api:
+    Cors:
+      AllowOrigin: "'*'"
+      AllowMethod: "'POST'"
+      AllowHeaders: "'Content-Type'"
+
+Resources:
+  Kanji2NumberFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Architectures:
+        - x86_64
+      Events:
+        CatchAll:
+          Type: Api
+          Properties:
+            Path: /kanji2number/{kanji}
+            Method: GET
+    Metadata:
+      DockerContext: ./kanji2num
+      Dockerfile: Dockerfile
+
+  Number2KanjiFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Architectures:
+        - x86_64
+      Events:
+        CatchAll:
+          Type: Api
+          Properties:
+            Path: /number2kanji/{num}
+            Method: GET
+    Metadata:
+      DockerContext: ./num2kanji
+      Dockerfile: Dockerfile
