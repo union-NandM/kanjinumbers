@@ -74,43 +74,44 @@ func checkFormat(str string) bool {
  *	漢数字文字列を数値に変換する
  */
 func converter(str string) int {
+  // "零"のときは早期に返す
   if str == "零" {
     return 0
   }
 
+  // 変換後の数値
   num := 0
 
+  // 文字列を1文字ずつに分割
   slice := strings.Split(str, "")
-  fmt.Println(slice)
   
+  // 千単位での和
   temp_sum := 0
+  // 直前の一桁の値を保持する変数
   temp := 0
   
+  /*
+   * 1文字ずつ見ていき、返す値に足していく
+   */
   for i, v := range slice {
     switch v {
     case "壱","弐","参","四","五","六","七","八","九":
       temp = figure[v]
-      fmt.Println(temp, "temp")
-      
       
     case "拾","百","千":
       temp_sum += temp * digit_small[v]
       temp = 0
-      fmt.Println(temp_sum, "temp_sum")
       
     case "万","億","兆":
       temp_sum += temp
       num += temp_sum * digit_large[v]
-      fmt.Println(num, "num")
       temp = 0
       temp_sum = 0
     }
     
     if i == len(slice)-1 {
       temp_sum += temp
-      fmt.Println(temp_sum, "temp_sum", "last")
       num += temp_sum
-      fmt.Println(num, "num", "last")
     }
     
   }
@@ -149,8 +150,9 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
     }, nil
   }
 
+  // 漢数字からアラビア数字に変換
   number := converter(kanji)
-  fmt.Println(number)
+  // jsの MAX_SAFE_INTEGER の範囲に収まらないため文字列化する
   number_str := strconv.Itoa(number)
   
 

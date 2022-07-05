@@ -36,6 +36,9 @@ var (
 	}
 )
 
+/*
+ *  千ごと（4桁ごと）に文字列化する関数
+ */
 func miniConverter(num int) string {
 	str := ""
 
@@ -50,6 +53,9 @@ func miniConverter(num int) string {
 	return str
 }
 
+/*
+ *  アラビア数字の数値を漢数字表記の文字列に変換する関数
+ */
 func converter(num int) string {
 	if (num == 0) {
 		return "零"
@@ -67,18 +73,25 @@ func converter(num int) string {
 	return str
 }
 
+/*
+ *  ハンドラ
+ */
 func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 
+	// corsを有効化するためのヘッダー
 	resHeaders := map[string]string{
 		"Access-Control-Allow-Origin": "*",
 		"Access-Control-Allow-Credentials": "true",
 		"Access-Control-Allow-Methods": "GET",
 	}
 
+	// pathパラメータの取得
 	requestNum := request.PathParameters["num"]
 
+	// 文字列を数値に変換
 	num, err := strconv.Atoi(requestNum);
 
+	// 変換できなかったら204で返す
 	if err != nil {
 		return events.APIGatewayProxyResponse{
 			StatusCode: 204,
@@ -86,6 +99,7 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 		}, nil
 	}
 	
+	// 扱える数値の範囲外の値が来たら204で返す
 	if num < 0 || num > 10000000000000000 {
 		return events.APIGatewayProxyResponse{
 			StatusCode: 204,
@@ -93,8 +107,10 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 		}, nil
 	}
 
+	// アラビア数字表記を漢数字表記に変換
 	kanji := converter(num);
 
+	// レスポンス
 	return events.APIGatewayProxyResponse{
 		Body:       fmt.Sprintf(`{"data":"%s"}`, kanji),
 		StatusCode: 200,
