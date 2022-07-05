@@ -4,11 +4,6 @@ Transform: AWS::Serverless-2016-10-31
 Globals:
   Function:
     Timeout: 10
-  Api:
-    Cors:
-      AllowOrigin: "'*'"
-      AllowMethod: "'POST'"
-      AllowHeaders: "'Content-Type'"
 
 Resources:
   Kanji2NumberFunction:

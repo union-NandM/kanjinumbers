@@ -1,3 +1,5 @@
 /.aws-sam
 go.sum
 index.html
+.env
+samconfig.toml
