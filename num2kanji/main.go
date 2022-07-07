@@ -42,8 +42,7 @@ var (
 func miniConverter(num int) string {
 	str := ""
 
-	var i int
-	for i = 1000; i >= 1; i/=10 {
+	for i := 1000; i >= 1; i/=10 {
 		if num / i > 0 {
 			str += figure[int(num / i)] + digit_small[i]
 		}
@@ -100,7 +99,7 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 	}
 	
 	// 扱える数値の範囲外の値が来たら204で返す
-	if num < 0 || num > 10000000000000000 {
+	if num < 0 || num >= 10000000000000000 {
 		return events.APIGatewayProxyResponse{
 			StatusCode: 204,
 			Headers: resHeaders,

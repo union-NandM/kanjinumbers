@@ -3,3 +3,4 @@ go.sum
 index.html
 .env
 samconfig.toml
+.DS_Store
