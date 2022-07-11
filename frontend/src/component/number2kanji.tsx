@@ -5,7 +5,7 @@ const Number2Kanji = () => (
   <Converter
     from="アラビア数字"
     to="漢数字"
-    api_uri="number2kanji"
+    apiUri="number2kanji"
     inputType="number"
   />
 );

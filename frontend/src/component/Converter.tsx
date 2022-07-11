@@ -4,7 +4,7 @@ type Props = {
   from: "アラビア数字" | "漢数字";
   to: "アラビア数字" | "漢数字";
   inputType: "number" | "text";
-  api_uri: "number2kanji" | "kanji2number";
+  apiUri: "number2kanji" | "kanji2number";
 };
 
 const Converter = (props: Props) => {
@@ -25,7 +25,7 @@ const Converter = (props: Props) => {
     }
     const res = await fetch(
       encodeURI(
-        `https://rxyfko3ctb.execute-api.ap-northeast-1.amazonaws.com/v1/${props.api_uri}/${fromNumber}`
+        `https://rxyfko3ctb.execute-api.ap-northeast-1.amazonaws.com/v1/${props.apiUri}/${fromNumber}`
       ),
       {
         mode: "cors",
