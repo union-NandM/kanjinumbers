@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ModeSwitch from "./component/ModeSwitch";
-import Kanji2Number from "./component/kanji2number";
-import Number2Kanji from "./component/number2kanji";
+import Kanji2Number from "./component/Kanji2Number";
+import Number2Kanji from "./component/Number2Kanji";
 import ModeType from "./type/ModeType";
 
 const App = () => {
